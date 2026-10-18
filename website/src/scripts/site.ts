@@ -380,8 +380,46 @@ function setupMobileHeader() {
   });
 }
 
+// The theme is first set in the page's head. A visitor's choice is kept; until there is one,
+// the page follows their system's setting as it changes.
+function setupTheme() {
+  const storageKey = 'pele:theme';
+  const system = window.matchMedia('(prefers-color-scheme: light)');
+  const toggles = [...document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')];
+  const apply = (theme: 'light' | 'dark') => {
+    document.documentElement.dataset.theme = theme;
+    const label = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
+    toggles.forEach((toggle) => {
+      toggle.title = label;
+      toggle.setAttribute('aria-label', label);
+    });
+    document.dispatchEvent(new CustomEvent('pele:theme-change', { detail: theme }));
+  };
+  const saved = () => {
+    try {
+      return localStorage.getItem(storageKey);
+    } catch {
+      return null;
+    }
+  };
+  apply(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+  toggles.forEach((toggle) => toggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    try {
+      localStorage.setItem(storageKey, next);
+    } catch {
+      // The choice still applies for this visit.
+    }
+    apply(next);
+  }));
+  system.addEventListener('change', () => {
+    if (!saved()) apply(system.matches ? 'light' : 'dark');
+  });
+}
+
 import { setupOutline } from './outline';
 
+setupTheme();
 setupOutline();
 setupMobileHeader();
 setupMobileDocsMenu();

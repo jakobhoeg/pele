@@ -45,10 +45,52 @@
   --syntax-magenta: #e47da8;
   --syntax-muted: #9f9d96;
   --syntax-comment: #6f6e69;
+  --strong: #f2f0e5;
+  --panel-hover: #222120;
+  --backdrop: rgb(16 15 15 / 85%);
+  --shadow: rgb(16 15 15 / 65%);
   --accent: var(--paper);
   --selection-background: rgb(255 252 240 / 15%);
   --content: 960px;
   --reading: calc(var(--font-size-body) * 42);
+  color-scheme: dark;
+}
+
+// Flexoki's light scale. The 600 accents read on paper as the 400s do on black.
+:root[data-theme="light"] {
+  --ink: #fffcf0;
+  --panel: #f2f0e5;
+  --line: #e6e4d9;
+  --line-hover: #dad8ce;
+  --line-active: #cecdc3;
+  --faint: #b7b5ac;
+  --muted: #6f6e69;
+  --body: #282726;
+  --paper: #282726;
+  --strong: #100f0f;
+  --panel-hover: #ebe9de;
+  --backdrop: rgb(255 252 240 / 85%);
+  --shadow: rgb(16 15 15 / 15%);
+  --red: #af3029;
+  --orange: #bc5215;
+  --yellow: #ad8301;
+  --green: #66800b;
+  --cyan: #24837b;
+  --blue: #205ea6;
+  --purple: #5e409d;
+  --magenta: #a02f6f;
+  --syntax-red: #af3029;
+  --syntax-orange: #bc5215;
+  --syntax-yellow: #ad8301;
+  --syntax-green: #66800b;
+  --syntax-cyan: #24837b;
+  --syntax-blue: #205ea6;
+  --syntax-purple: #5e409d;
+  --syntax-magenta: #a02f6f;
+  --syntax-muted: #6f6e69;
+  --syntax-comment: #9f9d96;
+  --selection-background: rgb(16 15 15 / 10%);
+  color-scheme: light;
 }
 
 * {
@@ -72,7 +114,6 @@ body {
   font-size: var(--font-size-body);
   line-height: 1.55;
   text-rendering: optimizeLegibility;
-  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
 }
 a {

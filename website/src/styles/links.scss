@@ -6,7 +6,7 @@
 
   @media (hover: hover) {
     &:hover {
-      --link-color: var(--link-hover-color, #f2f0e5);
+      --link-color: var(--link-hover-color, var(--strong));
       text-decoration-color: currentColor;
     }
   }
@@ -14,7 +14,7 @@
 
 :where(.site-header-links, .site-footer, .footer-nav) a:focus-visible,
 :where(.playground-link):focus-visible {
-  --link-color: var(--link-hover-color, #f2f0e5);
+  --link-color: var(--link-hover-color, var(--strong));
   outline: 0;
 }
 

@@ -18,6 +18,11 @@
 .header-action.sidebar-playground {
   display: none;
 }
+// The toggle names the theme it switches to.
+:root[data-theme="light"] .theme-toggle .theme-to-light,
+:root:not([data-theme="light"]) .theme-toggle .theme-to-dark {
+  display: none;
+}
 .header-action {
   display: inline-flex;
   width: auto;
@@ -37,12 +42,12 @@
   @media (hover: hover) {
     &:hover {
       outline: 0;
-      color: #f2f0e5;
+      color: var(--strong);
     }
   }
   &:focus-visible {
     outline: 0;
-    color: #f2f0e5;
+    color: var(--strong);
   }
   svg {
     flex: 0 0 auto;
@@ -102,5 +107,8 @@
     kbd {
       display: none;
     }
+  }
+  .theme-toggle span {
+    display: none;
   }
 }

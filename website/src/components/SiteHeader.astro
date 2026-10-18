@@ -1,6 +1,7 @@
 ---
 import Search from './Search.astro';
 import MobileDocsMenu from './MobileDocsMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import type { DocsPageId, Heading } from '../lib/site';
 
 interface Props {
@@ -22,6 +23,7 @@ const { current, headings = [], child } = Astro.props;
       </svg>
       <span>Playground</span>
     </a>
+    <ThemeToggle />
     <MobileDocsMenu current={current} headings={headings} child={child} />
   </nav>
 </div>

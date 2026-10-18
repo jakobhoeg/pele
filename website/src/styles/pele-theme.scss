@@ -4,7 +4,7 @@
   --pele-font-mono: var(--font-mono);
   --pele-radius: var(--radius-small);
 }
-[data-pele-theme="light"] {
+@mixin light {
   --pele-bg: #fffcf0;
   --pele-fg: #100f0f;
   --pele-muted: #6f6e69;
@@ -23,7 +23,7 @@
   --pele-series-7: #5e409d;
   --pele-series-8: #a02f6f;
 }
-[data-pele-theme="dark"] {
+@mixin dark {
   --pele-bg: #100f0f;
   --pele-fg: #cecdc3;
   --pele-muted: #878580;
@@ -42,6 +42,13 @@
   --pele-series-7: #8b7ec8;
   --pele-series-8: #ce5d97;
 }
+
+[data-pele-theme="light"] { @include light; }
+[data-pele-theme="dark"] { @include dark; }
+// The site's own diagrams follow the page's theme.
+[data-pele-theme="site"] { @include dark; }
+// Weighed as the attribute alone, so the pages' own token steps still win over it.
+:where(:root[data-theme="light"]) [data-pele-theme="site"] { @include light; }
 
 // A diagram that can be zoomed takes the keyboard's focus. The site shows that on its buttons
 // only, and without a ring around the diagram. Browsers ring a focused SVG after a click as

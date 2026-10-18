@@ -51,6 +51,13 @@ const socialImage = new URL('/social.png', Astro.site);
       button.header-action { appearance: none; border: 1px solid transparent; outline: 0; background: transparent; color: inherit; font: inherit; }
     </style>
     <script is:inline>
+      // Set the theme before the page paints: the visitor's choice, or else their system's.
+      (() => {
+        let saved = null;
+        try { saved = localStorage.getItem('pele:theme'); } catch {}
+        const light = saved ? saved === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = light ? 'light' : 'dark';
+      })();
       if (window.location.hash) {
         document.documentElement.dataset.initialHash = '';
         window.addEventListener('load', () => {

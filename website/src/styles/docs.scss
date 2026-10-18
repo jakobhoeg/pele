@@ -227,7 +227,8 @@
       }
     }
 
-    > .sidebar-playground {
+    > .sidebar-playground,
+    > .theme-toggle {
       display: inline-flex;
       min-height: 26px;
       color: var(--paper);

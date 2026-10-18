@@ -44,10 +44,12 @@
     position: relative;
     display: flex;
     align-items: center;
+    gap: 16px;
     margin-left: auto;
   }
+  .theme-toggle span { display: none; }
   #playground-settings {
-    &[aria-expanded="true"] { color: #f2f0e5; }
+    &[aria-expanded="true"] { color: var(--strong); }
   }
 }
 .playground-header-slot {

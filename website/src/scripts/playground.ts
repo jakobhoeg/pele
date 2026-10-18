@@ -7,6 +7,7 @@ import { mermaidAutocomplete } from './playground-autocomplete';
 import { createPlaygroundEditor } from './playground-editor';
 import { setupPlaygroundColumns } from './playground-columns';
 import { setupPlaygroundCopy } from './playground-copy';
+import { setupPlaygroundExport } from './playground-export';
 import { renderMermaid } from './playground-mermaid';
 import { setupPlaygroundSettings } from './playground-settings';
 import { setupPlaygroundShare } from './playground-share';
@@ -54,6 +55,10 @@ const input = createPlaygroundEditor('input', 'Mermaid source', [...editorHighli
 const output = createPlaygroundEditor('output', 'SVG source', editorHighlighting('xml'), initialWrap);
 const inputCopy = setupPlaygroundCopy('input', 'Copy source', () => input.value);
 const outputCopy = setupPlaygroundCopy('output', 'Copy SVG', () => output.value);
+const imageExport = setupPlaygroundExport(
+  () => peleOutput.dataset.stale === undefined ? peleOutput.querySelector<SVGSVGElement>(':scope > svg') : null,
+  (message) => setStatus(output.status, message, 'error'),
+);
 
 let initialSource = input.value;
 let view: View = 'pele';
@@ -119,6 +124,7 @@ function renderPele() {
     peleStatus = { text: '', error: false };
     peleTime.textContent = '';
     outputCopy.refresh();
+    imageExport.refresh();
     showOutputStatus();
     return;
   }
@@ -155,6 +161,7 @@ function renderPele() {
     peleTime.textContent = '';
   }
   outputCopy.refresh();
+  imageExport.refresh();
   showOutputStatus();
 }
 
@@ -176,7 +183,7 @@ async function updateMermaid() {
   mermaidStatus = 'Mermaid rendering…';
   showOutputStatus();
   try {
-    const result = await renderMermaid(source, 'dark');
+    const result = await renderMermaid(source, document.documentElement.dataset.theme === 'light' ? 'default' : 'dark');
     if (revision !== mermaidRevision) return;
     mermaidRendered = { source };
     mermaidOutput.innerHTML = result.svg;
@@ -222,6 +229,12 @@ function setSource(source: string) {
 }
 
 input.onChange(scheduleRender);
+
+// Pele's diagram follows the theme through its variables; Mermaid's is drawn again.
+document.addEventListener('pele:theme-change', () => {
+  mermaidRendered = undefined;
+  void updateMermaid();
+});
 
 const viewButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-view]:is(button)')];
 function setView(next: View) {

@@ -9,7 +9,7 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--line-background);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 32%);
+  box-shadow: 0 12px 32px var(--shadow);
 
   > button, > .menu-submenu > button {
     display: flex;
@@ -53,6 +53,11 @@
     color: var(--paper);
     svg { color: var(--muted); }
     &[data-copied] svg { color: var(--syntax-green); }
+  }
+  &[role="menu"] > button[aria-disabled="true"] {
+    color: var(--faint);
+    cursor: default;
+    svg { color: var(--faint); }
   }
   .menu-label { flex: 1; min-width: 0; }
   .menu-check { margin-left: auto; opacity: 0; }

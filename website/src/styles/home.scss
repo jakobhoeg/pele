@@ -242,18 +242,18 @@
   }
   @media (hover: hover) {
     &:hover {
-      background: #222120;
+      background: var(--panel-hover);
 
       h3 {
-        color: #f2f0e5;
+        color: var(--strong);
       }
     }
   }
   &:focus-visible {
-    background: #222120;
+    background: var(--panel-hover);
 
     h3 {
-      color: #f2f0e5;
+      color: var(--strong);
     }
   }
 }
@@ -285,18 +285,18 @@
 
   @media (hover: hover) {
     &:hover {
-      background: #222120;
+      background: var(--panel-hover);
 
       h3 {
-        color: #f2f0e5;
+        color: var(--strong);
       }
     }
   }
   &:focus-visible {
-    background: #222120;
+    background: var(--panel-hover);
 
     h3 {
-      color: #f2f0e5;
+      color: var(--strong);
     }
   }
 }
